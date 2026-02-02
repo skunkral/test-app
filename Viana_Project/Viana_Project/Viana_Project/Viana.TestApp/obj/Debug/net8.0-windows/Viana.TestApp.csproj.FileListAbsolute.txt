@@ -46,3 +46,5 @@ D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestApp\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestApp\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.ServiceProcess.ServiceController.dll
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestApp\obj\Debug\net8.0-windows\Viana.TestApp.sourcelink.json
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestApp\obj\Debug\net8.0-windows\Viana.TestApp_MarkupCompile.lref
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestApp\obj\Debug\net8.0-windows\App.baml

@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
-using Microsoft.Win32;
 using Viana.Core.Models;
 using Viana.Infrastructure.FileSystem;
 using Viana.Infrastructure.Services;
