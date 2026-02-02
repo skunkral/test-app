@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4AR+r24+wZk=",
+  "dgSpecHash": "8mePOVEO4qU=",
   "success": true,
   "projectFilePath": "D:\\Programming Projects\\OJT_TIMELIMITED_TASK_6\\Viana_Project\\Viana_Project\\Viana_Project\\Viana.TestConsole\\Viana.TestConsole.csproj",
   "expectedPackageFiles": [
@@ -17,7 +17,9 @@
     "C:\\Users\\ralth\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\10.0.2\\microsoft.extensions.options.configurationextensions.10.0.2.nupkg.sha512",
     "C:\\Users\\ralth\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.2\\microsoft.extensions.primitives.10.0.2.nupkg.sha512",
     "C:\\Users\\ralth\\.nuget\\packages\\system.diagnostics.diagnosticsource\\10.0.2\\system.diagnostics.diagnosticsource.10.0.2.nupkg.sha512",
+    "C:\\Users\\ralth\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.2\\system.diagnostics.eventlog.10.0.2.nupkg.sha512",
     "C:\\Users\\ralth\\.nuget\\packages\\system.io.pipelines\\10.0.2\\system.io.pipelines.10.0.2.nupkg.sha512",
+    "C:\\Users\\ralth\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.2\\system.serviceprocess.servicecontroller.10.0.2.nupkg.sha512",
     "C:\\Users\\ralth\\.nuget\\packages\\system.text.encodings.web\\10.0.2\\system.text.encodings.web.10.0.2.nupkg.sha512",
     "C:\\Users\\ralth\\.nuget\\packages\\system.text.json\\10.0.2\\system.text.json.10.0.2.nupkg.sha512"
   ],

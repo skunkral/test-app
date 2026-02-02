@@ -50,3 +50,8 @@ D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\obj\Debug\net8.0\Viana.Sentinel.Service.pdb
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\obj\Debug\net8.0\Viana.Sentinel.Service.genruntimeconfig.cache
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\obj\Debug\net8.0\ref\Viana.Sentinel.Service.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\bin\Debug\net8.0\System.ServiceProcess.ServiceController.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.ServiceProcess.ServiceController.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\obj\Debug\net8.0\Viana.Sentinel.Service.sourcelink.json
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Sentinel.Service\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

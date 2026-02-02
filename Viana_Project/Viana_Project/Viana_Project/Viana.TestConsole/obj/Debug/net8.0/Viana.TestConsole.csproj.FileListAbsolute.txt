@@ -35,3 +35,9 @@ D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\obj\Debug\net8.0\Viana.TestConsole.pdb
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\obj\Debug\net8.0\Viana.TestConsole.genruntimeconfig.cache
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\obj\Debug\net8.0\ref\Viana.TestConsole.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\bin\Debug\net8.0\System.ServiceProcess.ServiceController.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.ServiceProcess.ServiceController.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.TestConsole\obj\Debug\net8.0\Viana.TestConsole.sourcelink.json

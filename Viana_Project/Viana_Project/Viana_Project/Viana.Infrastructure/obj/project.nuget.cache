@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "sJsplibPcKg=",
+  "dgSpecHash": "+rVFwABCxWk=",
   "success": true,
   "projectFilePath": "D:\\Programming Projects\\OJT_TIMELIMITED_TASK_6\\Viana_Project\\Viana_Project\\Viana_Project\\Viana.Infrastructure\\Viana.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ralth\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\ralth\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+    "C:\\Users\\ralth\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\ralth\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.2\\system.diagnostics.eventlog.10.0.2.nupkg.sha512",
+    "C:\\Users\\ralth\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.2\\system.serviceprocess.servicecontroller.10.0.2.nupkg.sha512"
   ],
   "logs": []
 }

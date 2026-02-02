@@ -13,3 +13,4 @@ D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\refint\Viana.Infrastructure.dll
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.pdb
 D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\ref\Viana.Infrastructure.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.sourcelink.json

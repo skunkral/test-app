@@ -9,3 +9,4 @@ d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana
 d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\refint\Viana.Core.dll
 d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.pdb
 d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\ref\Viana.Core.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.sourcelink.json
