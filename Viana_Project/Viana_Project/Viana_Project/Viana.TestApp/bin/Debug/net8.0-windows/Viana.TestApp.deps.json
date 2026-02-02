@@ -9,6 +9,7 @@
       "Viana.TestApp/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Console": "10.0.2",
+          "System.ServiceProcess.ServiceController": "10.0.2",
           "Viana.Infrastructure": "1.0.0"
         },
         "runtime": {

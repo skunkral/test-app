@@ -1076,6 +1076,7 @@
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
       "Microsoft.Extensions.Logging.Console >= 10.0.2",
+      "System.ServiceProcess.ServiceController >= 10.0.2",
       "Viana.Infrastructure >= 1.0.0"
     ]
   },
@@ -1126,6 +1127,10 @@
         "targetAlias": "net8.0-windows",
         "dependencies": {
           "Microsoft.Extensions.Logging.Console": {
+            "target": "Package",
+            "version": "[10.0.2, )"
+          },
+          "System.ServiceProcess.ServiceController": {
             "target": "Package",
             "version": "[10.0.2, )"
           }

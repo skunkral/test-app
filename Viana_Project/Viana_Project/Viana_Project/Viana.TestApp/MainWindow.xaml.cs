@@ -7,15 +7,24 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
+using Microsoft.Win32;
 using Viana.Core.Models;
+using Viana.Infrastructure.FileSystem;
 using Viana.Infrastructure.Services;
 
 namespace Viana.TestApp
 {
     public partial class MainWindow : Window
     {
-        private readonly ILogger<ResumableDownloader> _logger;
+        private readonly ILogger _logger; // Generic logger for UI
+        private readonly ILogger<ResumableDownloader> _downloaderLogger;
+        private readonly ILogger<ManifestManager> _manifestLogger;
+        private readonly ILogger<RollbackManager> _rollbackLogger;
+        
         private readonly ResumableDownloader _downloader;
+        private readonly ManifestManager _manifestManager;
+        private readonly RollbackManager _rollbackManager;
+        
         private readonly HttpClient _httpClient;
         private CancellationTokenSource? _cancellationTokenSource;
 
@@ -23,28 +32,39 @@ namespace Viana.TestApp
         {
             InitializeComponent();
 
-            // Initialize default save path
+            // Initialize default paths
             txtSavePath.Text = Path.Combine(Path.GetTempPath(), "viana_test_download.bin");
+            txtActivePath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Viana", "Active");
+            txtStagingPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Viana", "Staging");
+            txtRollbackActivePath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Viana", "Active");
 
-            // Setup logging with custom logger that writes to UI
+            // Setup logging
             var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddProvider(new UILoggerProvider(this));
                 builder.SetMinimumLevel(LogLevel.Debug);
             });
 
-            _logger = loggerFactory.CreateLogger<ResumableDownloader>();
+            _logger = loggerFactory.CreateLogger("VianaApp");
+            _downloaderLogger = loggerFactory.CreateLogger<ResumableDownloader>();
+            _manifestLogger = loggerFactory.CreateLogger<ManifestManager>();
+            _rollbackLogger = loggerFactory.CreateLogger<RollbackManager>();
 
-            // Create HttpClient with SSL bypass for testing
+            // Create HttpClient
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
             _httpClient = new HttpClient(handler);
             _httpClient.Timeout = TimeSpan.FromMinutes(30);
 
-            _downloader = new ResumableDownloader(_httpClient, _logger);
+            // Initialize Services
+            _downloader = new ResumableDownloader(_httpClient, _downloaderLogger);
+            _manifestManager = new ManifestManager(_httpClient, _manifestLogger);
+            _rollbackManager = new RollbackManager(_rollbackLogger);
 
-            LogMessage("Application initialized. Ready to start download.");
+            LogMessage("Application initialized. Components ready.");
         }
+
+        #region Resumable Downloader Logic
 
         private void BrowseSavePath_Click(object sender, RoutedEventArgs e)
         {
@@ -64,46 +84,19 @@ namespace Viana.TestApp
 
         private async void StartDownload_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtDownloadUrl.Text))
-            {
-                MessageBox.Show("Please enter a download URL.", "Validation Error", 
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtSavePath.Text))
-            {
-                MessageBox.Show("Please select a save location.", "Validation Error", 
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(txtDownloadUrl.Text)) return;
 
             try
             {
-                // Update UI state
                 btnStartDownload.IsEnabled = false;
                 btnCancelDownload.IsEnabled = true;
-                txtDownloadUrl.IsEnabled = false;
-                txtSavePath.IsEnabled = false;
-                chkValidateHash.IsEnabled = false;
-                txtExpectedHash.IsEnabled = false;
-
-                // Reset progress
+                
+                // Reset progress UI
                 progressBar.Value = 0;
                 txtProgressPercent.Text = "0%";
                 txtStatus.Text = "Starting...";
-                txtDownloaded.Text = "0 MB";
-                txtTotalSize.Text = "0 MB";
-                txtSpeed.Text = "0 MB/s";
 
-                LogMessage("=== Download Started ===");
-                LogMessage($"URL: {txtDownloadUrl.Text}");
-                LogMessage($"Destination: {txtSavePath.Text}");
-
-                // Create cancellation token
                 _cancellationTokenSource = new CancellationTokenSource();
-
-                // Create progress reporter
                 var progress = new Progress<DownloadState>(state =>
                 {
                     Dispatcher.Invoke(() =>
@@ -113,69 +106,35 @@ namespace Viana.TestApp
                         txtStatus.Text = state.Status.ToString();
                         txtDownloaded.Text = $"{state.DownloadedBytes / 1024.0 / 1024.0:F2} MB";
                         txtTotalSize.Text = $"{state.TotalBytes / 1024.0 / 1024.0:F2} MB";
-                        
                         if (state.BytesPerSecond.HasValue)
-                        {
                             txtSpeed.Text = $"{state.BytesPerSecond.Value / 1024.0 / 1024.0:F2} MB/s";
-                        }
-
-                        // Update status color based on state
-                        txtStatus.Foreground = state.Status switch
-                        {
-                            DownloadStatus.Downloading => System.Windows.Media.Brushes.Blue,
-                            DownloadStatus.Completed => System.Windows.Media.Brushes.Green,
-                            DownloadStatus.Failed => System.Windows.Media.Brushes.Red,
-                            DownloadStatus.Cancelled => System.Windows.Media.Brushes.Orange,
-                            _ => System.Windows.Media.Brushes.Gray
-                        };
                     });
                 });
 
-                // Start download
                 if (chkValidateHash.IsChecked == true && !string.IsNullOrWhiteSpace(txtExpectedHash.Text))
                 {
-                    await _downloader.DownloadFileAsync(
-                        txtDownloadUrl.Text,
-                        txtSavePath.Text,
-                        txtExpectedHash.Text,
-                        _cancellationTokenSource.Token,
-                        progress);
+                    await _downloader.DownloadFileAsync(txtDownloadUrl.Text, txtSavePath.Text, txtExpectedHash.Text, _cancellationTokenSource.Token, progress);
                 }
                 else
                 {
-                    await _downloader.DownloadFileAsync(
-                        txtDownloadUrl.Text,
-                        txtSavePath.Text,
-                        _cancellationTokenSource.Token,
-                        progress);
+                    await _downloader.DownloadFileAsync(txtDownloadUrl.Text, txtSavePath.Text, _cancellationTokenSource.Token, progress);
                 }
 
-                LogMessage("=== Download Completed Successfully ===");
-                MessageBox.Show("Download completed successfully!", "Success", 
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("Download completed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (OperationCanceledException)
             {
-                LogMessage("=== Download Cancelled by User ===");
-                MessageBox.Show("Download was cancelled. Partial file has been saved and can be resumed.", 
-                    "Cancelled", MessageBoxButton.OK, MessageBoxImage.Information);
+                LogMessage("Download Cancelled.");
             }
             catch (Exception ex)
             {
-                LogMessage($"=== Download Failed ===");
-                LogMessage($"Error: {ex.Message}");
-                MessageBox.Show($"Download failed: {ex.Message}", "Error", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                LogMessage($"Download Failed: {ex.Message}");
+                System.Windows.MessageBox.Show($"Error: {ex.Message}", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                // Reset UI state
                 btnStartDownload.IsEnabled = true;
                 btnCancelDownload.IsEnabled = false;
-                txtDownloadUrl.IsEnabled = true;
-                txtSavePath.IsEnabled = true;
-                chkValidateHash.IsEnabled = true;
-                txtExpectedHash.IsEnabled = chkValidateHash.IsChecked == true;
                 _cancellationTokenSource?.Dispose();
                 _cancellationTokenSource = null;
             }
@@ -183,17 +142,121 @@ namespace Viana.TestApp
 
         private void CancelDownload_Click(object sender, RoutedEventArgs e)
         {
-            if (_cancellationTokenSource != null)
+            _cancellationTokenSource?.Cancel();
+        }
+
+        #endregion
+
+        #region Manifest Manager Logic
+
+        private void BrowseActivePath_Click(object sender, RoutedEventArgs e) => BrowseFolder(txtActivePath);
+
+        private async void CheckUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                LogMessage("Cancelling download...");
-                _cancellationTokenSource.Cancel();
+                LogMessage($"Checking for updates from: {txtManifestUrl.Text}");
+                var updates = await _manifestManager.CheckForUpdatesAsync(txtManifestUrl.Text, txtActivePath.Text);
+                
+                gridUpdates.ItemsSource = updates;
+                LogMessage($"Found {updates.Count} updates.");
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Error checking updates: {ex.Message}");
+                System.Windows.MessageBox.Show($"Check failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        #region Rollback Manager Logic
+
+        private void BrowseStagingPath_Click(object sender, RoutedEventArgs e) => BrowseFolder(txtStagingPath);
+        private void BrowseRollbackActivePath_Click(object sender, RoutedEventArgs e) => BrowseFolder(txtRollbackActivePath);
+
+        private void CreateBackup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var backup = _rollbackManager.CreateBackup(txtRollbackActivePath.Text);
+                LogMessage($"Backup created at: {backup}");
+                System.Windows.MessageBox.Show($"Backup created: {backup}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Backup failed: {ex.Message}");
+            }
+        }
+
+        private void RestoreBackup_Click(object sender, RoutedEventArgs e)
+        {
+            // Simple input dialog for backup path would be better, but for now we'll just log
+            LogMessage("To test restore, please implement a Selector or manually use code. (Simplified for MVP UI)");
+            // In a real test app, we'd pick a folder.
+            var dialog = new OpenFileDialog 
+            { 
+                Title = "Select 'manifest.json' inside the Backup folder to identify it",
+                Filter = "Json Files|*.json|All Files|*.*",
+                ValidateNames = false,
+                CheckFileExists = false,
+                FileName = "Folder Selection"
+            };
+            
+            if (dialog.ShowDialog() == true)
+            {
+                var backupDir = Path.GetDirectoryName(dialog.FileName);
+                try {
+                     _rollbackManager.RestoreBackup(backupDir!, txtRollbackActivePath.Text);
+                     LogMessage("Restore completed.");
+                     System.Windows.MessageBox.Show("Restore completed.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch(Exception ex) { LogMessage($"Restore failed: {ex.Message}"); }
+            }
+        }
+
+        private void PerformSwap_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string? service = string.IsNullOrWhiteSpace(txtServiceName.Text) ? null : txtServiceName.Text;
+                _rollbackManager.PerformAtomicSwap(txtStagingPath.Text, txtRollbackActivePath.Text, service);
+                LogMessage("Atomic Swap Completed Successfully.");
+                System.Windows.MessageBox.Show("Swap completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"Swap Failed: {ex.Message}");
+                System.Windows.MessageBox.Show($"Swap failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private void BrowseFolder(System.Windows.Controls.TextBox textBox)
+        {
+            // Using OpenFileDialog to select a "file" but acting as folder picker
+            // Or just just telling user to paste path.
+            // For MVP simplicity, let's just use OpenFileDialog with a dummy name
+            var dialog = new OpenFileDialog
+            {
+                ValidateNames = false,
+                CheckFileExists = false,
+                FileName = "Folder Selection",
+                Title = "Select Folder (Click Open)"
+            };
+            
+            if (dialog.ShowDialog() == true)
+            {
+                textBox.Text = Path.GetDirectoryName(dialog.FileName);
             }
         }
 
         private void ClearLog_Click(object sender, RoutedEventArgs e)
         {
             txtLog.Text = "";
-            LogMessage("Log cleared.");
         }
 
         public void LogMessage(string message)
@@ -202,8 +265,6 @@ namespace Viana.TestApp
             {
                 var timestamp = DateTime.Now.ToString("HH:mm:ss");
                 txtLog.Text += $"[{timestamp}] {message}\n";
-                
-                // Auto-scroll to bottom
                 var scrollViewer = FindScrollViewer(txtLog);
                 scrollViewer?.ScrollToEnd();
             });
@@ -211,17 +272,13 @@ namespace Viana.TestApp
 
         private System.Windows.Controls.ScrollViewer? FindScrollViewer(System.Windows.DependencyObject element)
         {
-            if (element is System.Windows.Controls.ScrollViewer scrollViewer)
-                return scrollViewer;
-
+            if (element is System.Windows.Controls.ScrollViewer scrollViewer) return scrollViewer;
             for (int i = 0; i < System.Windows.Media.VisualTreeHelper.GetChildrenCount(element); i++)
             {
                 var child = System.Windows.Media.VisualTreeHelper.GetChild(element, i);
                 var result = FindScrollViewer(child);
-                if (result != null)
-                    return result;
+                if (result != null) return result;
             }
-
             return null;
         }
 
@@ -232,23 +289,16 @@ namespace Viana.TestApp
             _httpClient?.Dispose();
             base.OnClosed(e);
         }
+
+        #endregion
     }
 
-    // Custom logger provider that writes to the UI
+    // Logger Provider Integration
     public class UILoggerProvider : ILoggerProvider
     {
         private readonly MainWindow _window;
-
-        public UILoggerProvider(MainWindow window)
-        {
-            _window = window;
-        }
-
-        public ILogger CreateLogger(string categoryName)
-        {
-            return new UILogger(_window, categoryName);
-        }
-
+        public UILoggerProvider(MainWindow window) => _window = window;
+        public ILogger CreateLogger(string categoryName) => new UILogger(_window, categoryName);
         public void Dispose() { }
     }
 
@@ -256,32 +306,16 @@ namespace Viana.TestApp
     {
         private readonly MainWindow _window;
         private readonly string _categoryName;
-
-        public UILogger(MainWindow window, string categoryName)
-        {
-            _window = window;
-            _categoryName = categoryName;
-        }
-
+        public UILogger(MainWindow window, string categoryName) { _window = window; _categoryName = categoryName; }
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
-
         public bool IsEnabled(LogLevel logLevel) => true;
-
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
-            var message = formatter(state, exception);
-            var level = logLevel switch
-            {
-                LogLevel.Trace => "TRACE",
-                LogLevel.Debug => "DEBUG",
-                LogLevel.Information => "INFO",
-                LogLevel.Warning => "WARN",
-                LogLevel.Error => "ERROR",
-                LogLevel.Critical => "CRITICAL",
-                _ => "LOG"
-            };
-
-            _window.LogMessage($"[{level}] {message}");
+            var msg = formatter(state, exception);
+            var level = logLevel.ToString().ToUpper();
+            // Shorten category
+            var cat = _categoryName.Contains(".") ? _categoryName.Substring(_categoryName.LastIndexOf('.') + 1) : _categoryName;
+            _window.LogMessage($"[{level}] [{cat}] {msg}");
         }
     }
 }

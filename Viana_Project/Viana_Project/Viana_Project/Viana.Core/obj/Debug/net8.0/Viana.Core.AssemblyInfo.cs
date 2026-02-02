@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Viana.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0315960432d95110674b6b8ea981166858738ae2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecd9eeac1aa22f45d0203331b2d2860323a4f78b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Viana.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Viana.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

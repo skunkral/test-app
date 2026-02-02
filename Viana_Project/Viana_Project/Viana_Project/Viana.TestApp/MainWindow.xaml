@@ -217,30 +217,127 @@
                 </ScrollViewer>
             </TabItem>
 
-            <!-- Tab 2: Manifest Manager (Placeholder for future) -->
+            <!-- Tab 2: Manifest Manager -->
             <TabItem Header="Manifest Manager" FontSize="14" Padding="15,8">
-                <Border Style="{StaticResource Card}">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="🚧 Coming Soon" FontSize="48" 
-                                   Foreground="#BDBDBD" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Manifest Manager will be implemented next" 
-                                   FontSize="14" Foreground="#757575" 
-                                   HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Configuration -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="Manifest Configuration" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                                
+                                <TextBlock Text="Manifest URL:" Margin="0,0,0,5"/>
+                                <TextBox x:Name="txtManifestUrl" 
+                                         Text="http://localhost:5000/manifest.json"
+                                         Padding="10" FontSize="13" Margin="0,0,0,15"/>
+                                
+                                <TextBlock Text="Local 'Active' Path:" Margin="0,0,0,5"/>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="txtActivePath" 
+                                             Grid.Column="0"
+                                             Padding="10" FontSize="13" Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Browse..." 
+                                            Click="BrowseActivePath_Click"
+                                            Style="{StaticResource ModernButton}"/>
+                                </Grid>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Check for Updates" 
+                                            Click="CheckUpdates_Click"
+                                            Style="{StaticResource ModernButton}" 
+                                            Width="180" Margin="0,0,10,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Results -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="Update Results" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                                <DataGrid x:Name="gridUpdates" Height="200" AutoGenerateColumns="True" IsReadOnly="True"/>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
-                </Border>
+                </ScrollViewer>
             </TabItem>
 
-            <!-- Tab 3: Rollback Manager (Placeholder for future) -->
+            <!-- Tab 3: Rollback Manager -->
             <TabItem Header="Rollback Manager" FontSize="14" Padding="15,8">
-                <Border Style="{StaticResource Card}">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="🚧 Coming Soon" FontSize="48" 
-                                   Foreground="#BDBDBD" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Rollback Manager will be implemented later" 
-                                   FontSize="14" Foreground="#757575" 
-                                   HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Configuration -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="Rollback Configuration" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                                
+                                <TextBlock Text="Staging Path (Source):" Margin="0,0,0,5"/>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="txtStagingPath" 
+                                             Grid.Column="0"
+                                             Padding="10" FontSize="13" Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Browse..." 
+                                            Click="BrowseStagingPath_Click"
+                                            Style="{StaticResource ModernButton}"/>
+                                </Grid>
+
+                                <TextBlock Text="Active Path (Target):" Margin="0,0,0,5"/>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="txtRollbackActivePath" 
+                                             Grid.Column="0"
+                                             Padding="10" FontSize="13" Margin="0,0,10,0"/>
+                                    <Button Grid.Column="1" Content="Browse..." 
+                                            Click="BrowseRollbackActivePath_Click"
+                                            Style="{StaticResource ModernButton}"/>
+                                </Grid>
+
+                                <TextBlock Text="Service Name (Optional):" Margin="0,0,0,5"/>
+                                <TextBox x:Name="txtServiceName" 
+                                         Text="VianaApp"
+                                         Padding="10" FontSize="13" Margin="0,0,0,15"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Actions -->
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="Atomic Operations" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                                
+                                <WrapPanel>
+                                    <Button Content="Create Backup" 
+                                            Click="CreateBackup_Click"
+                                            Style="{StaticResource ModernButton}" 
+                                            Width="160" Margin="0,0,10,10"/>
+                                    
+                                    <Button Content="Perform Atomic Swap" 
+                                            Click="PerformSwap_Click"
+                                            Style="{StaticResource SecondaryButton}" 
+                                            Width="200" Margin="0,0,10,10"/>
+
+                                    <Button x:Name="btnRestore" Content="Restore Backup..." 
+                                            Click="RestoreBackup_Click"
+                                            Style="{StaticResource ModernButton}" 
+                                            Width="160" Margin="0,0,10,10"
+                                            Background="#757575"/>
+                                </WrapPanel>
+
+                                <TextBlock Text="Note: Atomic Swap moves Staging > Active and handles Service restart." 
+                                           FontSize="12" Foreground="#757575" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
-                </Border>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>
