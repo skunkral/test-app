@@ -1,0 +1,15 @@
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.csproj.AssemblyReference.cache
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.AssemblyInfoInputs.cache
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.AssemblyInfo.cs
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\bin\Debug\net8.0\Viana.Infrastructure.deps.json
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\bin\Debug\net8.0\Viana.Infrastructure.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\bin\Debug\net8.0\Viana.Infrastructure.pdb
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\bin\Debug\net8.0\Viana.Core.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\bin\Debug\net8.0\Viana.Core.pdb
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.In.386BA381.Up2Date
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\refint\Viana.Infrastructure.dll
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\Viana.Infrastructure.pdb
+D:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Infrastructure\obj\Debug\net8.0\ref\Viana.Infrastructure.dll

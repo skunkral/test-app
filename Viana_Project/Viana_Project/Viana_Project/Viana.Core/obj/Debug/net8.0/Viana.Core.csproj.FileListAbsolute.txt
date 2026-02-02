@@ -1,0 +1,11 @@
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\bin\Debug\net8.0\Viana.Core.deps.json
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\bin\Debug\net8.0\Viana.Core.dll
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\bin\Debug\net8.0\Viana.Core.pdb
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.GeneratedMSBuildEditorConfig.editorconfig
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.AssemblyInfoInputs.cache
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.AssemblyInfo.cs
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.csproj.CoreCompileInputs.cache
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.dll
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\refint\Viana.Core.dll
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\Viana.Core.pdb
+d:\Programming Projects\OJT_TIMELIMITED_TASK_6\Viana_Project\Viana_Project\Viana_Project\Viana.Core\obj\Debug\net8.0\ref\Viana.Core.dll
