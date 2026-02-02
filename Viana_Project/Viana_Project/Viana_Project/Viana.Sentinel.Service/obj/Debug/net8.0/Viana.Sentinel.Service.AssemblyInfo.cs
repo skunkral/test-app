@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Viana.Sentinel.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecd9eeac1aa22f45d0203331b2d2860323a4f78b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83cb54fceabce51a460191f455cf0ac5ad56de7e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Viana.Sentinel.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Viana.Sentinel.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

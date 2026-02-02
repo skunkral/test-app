@@ -5,18 +5,19 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         
-        <!-- Color Palette - Dark Blue & White Theme -->
-        <Color x:Key="PrimaryDarkBlue">#0f3460</Color>
-        <Color x:Key="PrimaryBlue">#1e3a8a</Color>
+        <!-- Color Palette - Enhanced Dark Blue & White Theme -->
+        <Color x:Key="PrimaryDarkBlue">#0d1b2a</Color>
+        <Color x:Key="PrimaryBlue">#1e40af</Color>
         <Color x:Key="AccentBlue">#3b82f6</Color>
         <Color x:Key="LightBlue">#60a5fa</Color>
+        <Color x:Key="SkyBlue">#0ea5e9</Color>
         <Color x:Key="White">#ffffff</Color>
         <Color x:Key="LightGray">#f8fafc</Color>
         <Color x:Key="DarkGray">#1f2937</Color>
-        <Color x:Key="MediumGray">#374151</Color>
-        <Color x:Key="BorderGray">#4b5563</Color>
-        <Color x:Key="TextLight">#f1f5f9</Color>
-        <Color x:Key="TextMuted">#cbd5e1</Color>
+        <Color x:Key="MediumGray">#334155</Color>
+        <Color x:Key="BorderGray">#2d5a7b</Color>
+        <Color x:Key="TextLight">#e0f2fe</Color>
+        <Color x:Key="TextMuted">#94a3b8</Color>
         
         <!-- Brush Resources -->
         <SolidColorBrush x:Key="AccentBlueBrush" Color="{StaticResource AccentBlue}"/>
@@ -29,8 +30,8 @@
         
         <!-- Modern Button Style - Primary -->
         <Style x:Key="ModernButton" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#3b82f6"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Padding" Value="20,12"/>
@@ -51,8 +52,12 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#2563eb"/>
                 </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#1d4ed8"/>
+                </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{StaticResource MediumGrayBrush}"/>
+                    <Setter Property="Background" Value="#4b5563"/>
+                    <Setter Property="Foreground" Value="#94a3b8"/>
                     <Setter Property="Cursor" Value="Arrow"/>
                 </Trigger>
             </Style.Triggers>
@@ -60,59 +65,66 @@
         
         <!-- Secondary Button Style -->
         <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
-            <Setter Property="Background" Value="{StaticResource PrimaryBlueBrush}"/>
+            <Setter Property="Background" Value="#1e40af"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#3b82f6"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+                    <Setter Property="Background" Value="#2563eb"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#1d4ed8"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
-        <!-- Card Style - Dark Theme -->
+        <!-- Card Style - Dark Theme with Enhanced Styling -->
         <Style x:Key="Card" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource DarkGrayBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="Background" Value="#1e293b"/>
+            <Setter Property="BorderBrush" Value="#2d5a7b"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Padding" Value="24"/>
             <Setter Property="Margin" Value="0,0,0,20"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect BlurRadius="12" ShadowDepth="0" Opacity="0.25" Color="Black"/>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="2" Opacity="0.35" Color="#0f172a"/>
                 </Setter.Value>
             </Setter>
         </Style>
         
         <!-- TextBlock Styles -->
         <Style x:Key="Title1" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontSize" Value="32"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
+            <Setter Property="Foreground" Value="#e0f2fe"/>
             <Setter Property="Margin" Value="0,0,0,8"/>
         </Style>
         
         <Style x:Key="Title3" TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
+            <Setter Property="Foreground" Value="#e0f2fe"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
         
         <Style x:Key="BodyText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
+            <Setter Property="Foreground" Value="#e0f2fe"/>
+            <Setter Property="LineHeight" Value="20"/>
         </Style>
         
         <Style x:Key="MutedText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
+            <Setter Property="Foreground" Value="#94a3b8"/>
         </Style>
 
         <!-- TextBox Style -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Background" Value="#0f3460"/>
-            <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="Background" Value="#0d1b2a"/>
+            <Setter Property="Foreground" Value="#e0f2fe"/>
+            <Setter Property="CaretBrush" Value="#3b82f6"/>
+            <Setter Property="BorderBrush" Value="#2d5a7b"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="12"/>
             <Setter Property="FontSize" Value="13"/>
@@ -127,7 +139,12 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="{StaticResource AccentBlueBrush}"/>
+                                <Setter Property="BorderBrush" Value="#3b82f6"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" Opacity="0.5" Color="#3b82f6"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Viana Infrastructure Dashboard" 
-        Height="800" Width="1200"
+        Height="900" Width="1400"
+        MinHeight="600" MinWidth="900"
         WindowStartupLocation="CenterScreen"
-        Background="#1f2937"
+        Background="#1a2332"
         Foreground="#f1f5f9"
         WindowStyle="SingleBorderWindow"
-        ResizeMode="CanResize">
+        ResizeMode="CanResizeWithGrip">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header Bar -->
-        <Border Grid.Row="0" Background="#0f3460" BorderBrush="#4b5563" BorderThickness="0,0,0,1" Padding="32,20">
+        <Border Grid.Row="0" Background="#0d1b2a" BorderBrush="#2d5a7b" BorderThickness="0,0,0,2" Padding="32,24">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -27,16 +28,19 @@
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock Text="Viana Infrastructure Dashboard" 
-                               FontSize="26" FontWeight="Bold" 
-                               Foreground="#f1f5f9" Margin="0,0,0,4"/>
-                    <TextBlock Text="Manage downloads, manifests, and system rollbacks" 
-                               FontSize="13" Foreground="#cbd5e1"/>
+                    <TextBlock Text="🛡️ Viana Infrastructure Dashboard" 
+                               FontSize="28" FontWeight="Bold" 
+                               Foreground="#e0f2fe" Margin="0,0,0,6"/>
+                    <TextBlock Text="Manage downloads, manifests, and atomic system operations" 
+                               FontSize="13" Foreground="#94a3b8"/>
                 </StackPanel>
                 
-                <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
-                    <Border Background="#1e3a8a" CornerRadius="8" Padding="12,8" Margin="0,0,8,0">
-                        <TextBlock Text="v1.0.0" Foreground="#60a5fa" FontSize="12" FontWeight="SemiBold"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="24,0,0,0">
+                    <Border Background="#1e40af" CornerRadius="8" Padding="14,10" Margin="0,0,12,0" BorderBrush="#3b82f6" BorderThickness="1">
+                        <TextBlock Text="v1.0.0" Foreground="#93c5fd" FontSize="12" FontWeight="SemiBold"/>
+                    </Border>
+                    <Border Background="#10b981" CornerRadius="8" Padding="14,10" BorderBrush="#34d399" BorderThickness="1">
+                        <TextBlock Text="● Online" Foreground="#d1fae5" FontSize="12" FontWeight="SemiBold"/>
                     </Border>
                 </StackPanel>
             </Grid>
@@ -44,50 +48,71 @@
 
         <!-- Main Content -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="32">
+            <Grid Margin="28,24,28,28">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Status Bar Cards -->
-                <Grid Grid.Row="0" Margin="0,0,0,32">
+                <Grid Grid.Row="0" Margin="0,0,0,28">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" MinWidth="200"/>
+                        <ColumnDefinition Width="*" MinWidth="200"/>
+                        <ColumnDefinition Width="*" MinWidth="200"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Status Card 1 -->
-                    <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,16,0">
-                        <StackPanel>
-                            <TextBlock Text="Status" Style="{StaticResource MutedText}"/>
-                            <TextBlock Text="Ready" FontSize="20" FontWeight="Bold" Foreground="#10b981" Margin="0,8,0,0"/>
-                            <TextBlock Text="System operational" Style="{StaticResource MutedText}" Margin="0,4,0,0"/>
-                        </StackPanel>
+                    <!-- Status Card 1 - Ready -->
+                    <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,14,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="✓" FontSize="24" Foreground="#10b981" Margin="0,2,12,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="System Status" Style="{StaticResource MutedText}"/>
+                                <TextBlock Text="Ready" FontSize="22" FontWeight="Bold" Foreground="#10b981" Margin="0,6,0,0"/>
+                                <TextBlock Text="All systems operational" Style="{StaticResource MutedText}" Margin="0,4,0,0" FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
-                    <!-- Status Card 2 -->
-                    <Border Grid.Column="1" Style="{StaticResource Card}" Margin="8,0,8,0">
-                        <StackPanel>
-                            <TextBlock Text="Active Downloads" Style="{StaticResource MutedText}"/>
-                            <TextBlock x:Name="txtActiveDownloads" Text="0" FontSize="20" FontWeight="Bold" Foreground="#3b82f6" Margin="0,8,0,0"/>
-                            <TextBlock Text="In progress" Style="{StaticResource MutedText}" Margin="0,4,0,0"/>
-                        </StackPanel>
+                    <!-- Status Card 2 - Active Downloads -->
+                    <Border Grid.Column="1" Style="{StaticResource Card}" Margin="7,0,7,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="⬇" FontSize="24" Foreground="#3b82f6" Margin="0,2,12,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Active Downloads" Style="{StaticResource MutedText}"/>
+                                <TextBlock x:Name="txtActiveDownloads" Text="0" FontSize="22" FontWeight="Bold" Foreground="#3b82f6" Margin="0,6,0,0"/>
+                                <TextBlock Text="Currently running" Style="{StaticResource MutedText}" Margin="0,4,0,0" FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
-                    <!-- Status Card 3 -->
-                    <Border Grid.Column="2" Style="{StaticResource Card}" Margin="16,0,0,0">
-                        <StackPanel>
-                            <TextBlock Text="Last Update" Style="{StaticResource MutedText}"/>
-                            <TextBlock x:Name="txtLastUpdate" Text="Never" FontSize="20" FontWeight="Bold" Foreground="#f59e0b" Margin="0,8,0,0"/>
-                            <TextBlock Text="Check manifest" Style="{StaticResource MutedText}" Margin="0,4,0,0"/>
-                        </StackPanel>
+                    <!-- Status Card 3 - Last Update -->
+                    <Border Grid.Column="2" Style="{StaticResource Card}" Margin="14,0,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="🕐" FontSize="24" Foreground="#f59e0b" Margin="0,2,12,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Last Update" Style="{StaticResource MutedText}"/>
+                                <TextBlock x:Name="txtLastUpdate" Text="Never" FontSize="22" FontWeight="Bold" Foreground="#fbbf24" Margin="0,6,0,0"/>
+                                <TextBlock Text="Check manifest" Style="{StaticResource MutedText}" Margin="0,4,0,0" FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
                 </Grid>
 
                 <!-- Tabs Section -->
-                <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0" Foreground="#f1f5f9">
+                <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0" Foreground="#e0f2fe" Margin="0,8,0,0">
                     <TabControl.Resources>
                         <Style TargetType="TabItem">
                             <Setter Property="Template">
@@ -95,12 +120,13 @@
                                     <ControlTemplate TargetType="TabItem">
                                         <Grid>
                                             <Border Name="Border" 
-                                                    Background="{StaticResource DarkGrayBrush}" 
-                                                    BorderBrush="{StaticResource BorderBrush}" 
-                                                    BorderThickness="0"
+                                                    Background="#1e293b" 
+                                                    BorderBrush="#2d5a7b" 
+                                                    BorderThickness="1"
                                                     CornerRadius="10,10,0,0"
-                                                    Padding="20,12"
-                                                    Margin="0,0,8,0">
+                                                    Padding="22,14"
+                                                    Margin="0,0,6,0"
+                                                    Effect="{StaticResource None}">
                                                 <ContentPresenter Name="ContentSite" 
                                                                   ContentSource="Header" 
                                                                   VerticalAlignment="Center"
@@ -109,16 +135,23 @@
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource AccentBlueBrush}"/>
+                                                <Setter TargetName="Border" Property="Background" Value="#3b82f6"/>
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="#60a5fa"/>
+                                                <Setter TargetName="Border" Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect BlurRadius="8" ShadowDepth="0" Opacity="0.4" Color="#3b82f6"/>
+                                                    </Setter.Value>
+                                                </Setter>
                                             </Trigger>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="#1e3a8a"/>
+                                                <Setter TargetName="Border" Property="Background" Value="#1e40af"/>
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="#3b82f6"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
+                            <Setter Property="Foreground" Value="#e0f2fe"/>
                             <Setter Property="FontSize" Value="14"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
                             <Setter Property="Padding" Value="0"/>
@@ -126,9 +159,9 @@
                     </TabControl.Resources>
 
                     <!-- Tab 1: Resumable Downloader -->
-                    <TabItem Header="📥 Resumable Downloader" Padding="15,8">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,20,20,0">
-                            <StackPanel>
+                    <TabItem Header="📥 Resumable Downloader" Padding="16,10">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel Margin="20,20,20,24">
                                 <!-- Download Configuration -->
                                 <Border Style="{StaticResource Card}">
                                     <StackPanel>
@@ -138,13 +171,13 @@
                                         <TextBox x:Name="txtDownloadUrl" 
                                                  Style="{StaticResource ModernTextBox}"
                                                  Text="https://speed.hetzner.de/10MB.bin"
-                                                 Margin="0,0,0,20"/>
+                                                 Margin="0,0,0,18" Height="38"/>
                                         
                                         <TextBlock Text="Save Location" Style="{StaticResource BodyText}" Margin="0,0,0,8"/>
-                                        <Grid Margin="0,0,0,20">
+                                        <Grid Margin="0,0,0,18">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*" MinWidth="150"/>
+                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBox x:Name="txtSavePath" 
                                                      Style="{StaticResource ModernTextBox}"
@@ -152,13 +185,14 @@
                                                      Margin="0,0,12,0"/>
                                             <Button Grid.Column="1" Content="Browse..." 
                                                     Click="BrowseSavePath_Click"
-                                                    Style="{StaticResource ModernButton}"/>
+                                                    Style="{StaticResource ModernButton}"
+                                                    Padding="16,12"/>
                                         </Grid>
 
                                         <CheckBox x:Name="chkValidateHash" 
-                                                  Content="Validate SHA256 Hash" 
+                                                  Content="✓ Validate SHA256 Hash" 
                                                   Style="{StaticResource ModernCheckBox}"
-                                                  Margin="0,0,0,12" IsChecked="False"/>
+                                                  Margin="0,0,0,14" IsChecked="False"/>
                                         <TextBox x:Name="txtExpectedHash" 
                                                  Style="{StaticResource ModernTextBox}"
                                                  Text="Expected hash value..."
@@ -177,11 +211,11 @@
                                             <Button x:Name="btnStartDownload" Content="▶ Start Download" 
                                                     Click="StartDownload_Click"
                                                     Style="{StaticResource ModernButton}" 
-                                                    Margin="0,0,12,0" Width="160"/>
+                                                    Margin="0,0,12,0" MinWidth="160" Padding="20,14"/>
                                             <Button x:Name="btnCancelDownload" Content="⊠ Cancel" 
                                                     Click="CancelDownload_Click"
                                                     Style="{StaticResource SecondaryButton}" 
-                                                    Width="120" IsEnabled="False"/>
+                                                    MinWidth="120" IsEnabled="False" Padding="20,14"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -205,12 +239,16 @@
                                                        Text="0%" FontWeight="SemiBold" Foreground="#3b82f6"/>
                                         </Grid>
 
-                                        <ProgressBar x:Name="progressBar" Height="24" 
+                                        <ProgressBar x:Name="progressBar" Height="28" 
                                                      Minimum="0" Maximum="100" Value="0"
-                                                     Background="#374151"
+                                                     Background="#2d5a7b"
                                                      Foreground="#3b82f6"
                                                      Style="{StaticResource ModernProgressBar}"
-                                                     Margin="0,0,0,16"/>
+                                                     Margin="0,0,0,18"/>
+                                        
+                                        <Border Background="#0d1b2a" BorderBrush="#2d5a7b" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,0,0,16">
+                                            <TextBlock x:Name="txtProgressStatus" Text="Idle" Foreground="#60a5fa" FontSize="12" FontWeight="SemiBold"/>
+                                        </Border>
 
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -266,9 +304,9 @@
                     </TabItem>
 
                     <!-- Tab 2: Manifest Manager -->
-                    <TabItem Header="📋 Manifest Manager" Padding="15,8">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,20,20,0">
-                            <StackPanel>
+                    <TabItem Header="📋 Manifest Manager" Padding="16,10">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel Margin="20,20,20,24">
                                 <!-- Configuration -->
                                 <Border Style="{StaticResource Card}">
                                     <StackPanel>
@@ -278,7 +316,7 @@
                                         <TextBox x:Name="txtManifestUrl" 
                                                  Style="{StaticResource ModernTextBox}"
                                                  Text="http://localhost:5000/manifest.json"
-                                                 Margin="0,0,0,20"/>
+                                                 Margin="0,0,0,18" Height="38"/>
                                         
                                         <TextBlock Text="Local Active Path" Style="{StaticResource BodyText}" Margin="0,0,0,8"/>
                                         <Grid Margin="0,0,0,20">
@@ -298,7 +336,7 @@
                                         <Button Content="🔄 Check for Updates" 
                                                 Click="CheckUpdates_Click"
                                                 Style="{StaticResource ModernButton}" 
-                                                Width="200" HorizontalAlignment="Left"/>
+                                                MinWidth="200" HorizontalAlignment="Left" Padding="20,14"/>
                                     </StackPanel>
                                 </Border>
 
@@ -319,9 +357,9 @@
                     </TabItem>
 
                     <!-- Tab 3: Rollback Manager -->
-                    <TabItem Header="🔄 Rollback Manager" Padding="15,8">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,20,20,0">
-                            <StackPanel>
+                    <TabItem Header="🔄 Rollback Manager" Padding="16,10">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel Margin="20,20,20,24">
                                 <!-- Configuration -->
                                 <Border Style="{StaticResource Card}">
                                     <StackPanel>
@@ -371,20 +409,20 @@
                                         <TextBlock Text="Atomic Operations" Style="{StaticResource Title3}" Margin="0,0,0,16"/>
                                         
                                         <WrapPanel>
-                                            <Button Content="💾 Create Backup" 
-                                                    Click="CreateBackup_Click"
-                                                    Style="{StaticResource ModernButton}" 
-                                                    Width="160" Margin="0,0,12,12"/>
+                                        <Button Content="💾 Create Backup" 
+                                                Click="CreateBackup_Click"
+                                                Style="{StaticResource ModernButton}" 
+                                                MinWidth="160" Margin="0,0,12,12" Padding="18,12"/>
                                             
                                             <Button Content="⚡ Atomic Swap" 
-                                                    Click="PerformSwap_Click"
-                                                    Style="{StaticResource SecondaryButton}" 
-                                                    Width="160" Margin="0,0,12,12"/>
+                                                Click="PerformSwap_Click"
+                                                Style="{StaticResource SecondaryButton}" 
+                                                MinWidth="160" Margin="0,0,12,12" Padding="18,12"/>
 
                                             <Button x:Name="btnRestore" Content="↩ Restore Backup" 
                                                     Click="RestoreBackup_Click"
                                                     Style="{StaticResource ModernButton}" 
-                                                    Width="160" Margin="0,0,12,12"
+                                                    MinWidth="160" Margin="0,0,12,12" Padding="18,12"
                                                     Background="#8b5cf6"/>
                                         </WrapPanel>
 
